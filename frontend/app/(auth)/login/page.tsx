@@ -25,7 +25,7 @@ export default function LoginPage() {
         }
 
         try {
-            const res = await api.post('api/auth/login', formData);
+            const res = await api.post('/api/auth/login', formData);
             if (res.data.success) {
                 toast.success('Welcome back!');
                 localStorage.setItem('token', res.data.token);
