@@ -39,3 +39,26 @@ app.listen(port, () => {
 });
 
 module.exports = { app, pool };
+
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+app.get("/db-test", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json({
+      status: "DB OK",
+      time: result.rows[0]
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "DB ERROR",
+      error: err.message
+    });
+  }
+});
+
