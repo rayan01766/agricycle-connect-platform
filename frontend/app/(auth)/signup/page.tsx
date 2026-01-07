@@ -31,7 +31,7 @@ export default function SignupPage() {
         }
 
         try {
-            const res = await api.post('/auth/register', formData);
+            const res = await api.post('/api/auth/register', formData);
             if (res.data.success) {
                 toast.success('Account created successfully!');
                 localStorage.setItem('token', res.data.token);
